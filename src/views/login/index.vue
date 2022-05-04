@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm" :rules="loginRules">
+    <el-form
+      class="login-form"
+      ref="loginFormRef"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -24,6 +29,7 @@
         <el-input
           placeholder="password"
           name="password"
+          :type="passwordType"
           v-model="loginForm.password"
         />
         <span class="show-pwd">
@@ -34,9 +40,13 @@
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
-        >登录</el-button
-      >
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        :loading="loading"
+        @click="handleLogin"
+        >登录
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -44,6 +54,9 @@
 <script setup>
 import { ref } from 'vue'
 import { validatePassword } from './rules'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+// import SvgIcon from '@/components/SvgIcon'
 
 // 数据源
 const loginForm = ref({
@@ -76,6 +89,29 @@ const onChangePwdType = () => {
     passwordType.value = 'password'
   }
 }
+
+// 登录动作处理
+const loading = ref(false)
+const loginFormRef = ref(null)
+const store = useStore()
+const router = useRouter()
+const handleLogin = () => {
+  loginFormRef.value.validate((valid) => {
+    if (!valid) return
+    console.log(loginForm.value)
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then((data) => {
+        loading.value = false
+        router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -98,14 +134,14 @@ $cursor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
-    ::v-deep(.el-form-item) {
+    ::v-deep .el-form-item {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       color: #454545;
     }
 
-    ::v-deep(.el-input) {
+    ::v-deep .el-input {
       display: inline-block;
       height: 47px;
       width: 85%;
