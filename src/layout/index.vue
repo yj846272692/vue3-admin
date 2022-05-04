@@ -20,16 +20,16 @@
 </template>
 
 <script setup>
-import {} from 'vue'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
-import variables from '@/styles/variables.module.scss'
+
+import variables from '@/styles/variables.modules.scss'
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/mixins.scss';
-@import '~@/styles/variables.module.scss';
+@import '~@/styles/mixin.scss';
+@import '~@/styles/variables.modules.scss';
 
 .app-wrapper {
   @include clearfix;
@@ -45,6 +45,15 @@ import variables from '@/styles/variables.module.scss'
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
   transition: width #{$sideBarDuration};
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: calc(100% - #{$sideBarWidth});
+  transition: width 0.28s;
 }
 
 .hideSidebar .fixed-header {

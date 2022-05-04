@@ -1,9 +1,10 @@
-import { login, getUserInfo } from '@/api/sys'
+import { getUserInfo, login } from '@/api/sys'
 import md5 from 'md5'
-import { setItem, getItem, removeAllItem } from '@/utils/storage'
-import router from '@/router'
+import { getItem, removeAllItem, setItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import router from '@/router'
 import { setTimeStamp } from '@/utils/auth'
+
 export default {
   namespaced: true,
   state: () => ({
@@ -11,17 +12,20 @@ export default {
     userInfo: {}
   }),
   mutations: {
-    setToken(state, token) {
+    setToken (state, token) {
       state.token = token
       setItem(TOKEN, token)
     },
-    setUserInfo(state, userInfo) {
+    setUserInfo (state, userInfo) {
       state.userInfo = userInfo
     }
   },
   actions: {
-    login(context, userInfo) {
-      const { username, password } = userInfo
+    login (context, userInfo) {
+      const {
+        username,
+        password
+      } = userInfo
       console.log(md5(password))
       return new Promise((resolve, reject) => {
         login({
@@ -29,6 +33,7 @@ export default {
           password: md5(password)
         })
           .then((data) => {
+            // 保存登录时间
             setTimeStamp()
             resolve(data)
             console.log(data)
@@ -39,13 +44,13 @@ export default {
           })
       })
     },
-    async getUserInfo(context) {
+    async getUserInfo (context) {
       const res = await getUserInfo()
       console.log(res)
       this.commit('user/setUserInfo', res)
       return res
     },
-    logout() {
+    logout () {
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
       removeAllItem()

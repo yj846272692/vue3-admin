@@ -13,7 +13,11 @@ const service = axios.create({
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
-    const { success, message, data } = response.data
+    const {
+      success,
+      message,
+      data
+    } = response.data
     //   要根据success的成功与否决定下面的操作
     if (success) {
       return data
@@ -32,7 +36,7 @@ service.interceptors.response.use(
 
 // 请求拦截器
 service.interceptors.request.use(
-  (config) => {
+  config => {
     // 在这个位置需要统一的去注入token
     if (store.getters.token) {
       if (isCheckTimeout()) {
@@ -45,7 +49,7 @@ service.interceptors.request.use(
     }
     return config // 必须返回配置
   },
-  (error) => {
+  error => {
     // 处理 token 超时问题
     if (
       error.response &&

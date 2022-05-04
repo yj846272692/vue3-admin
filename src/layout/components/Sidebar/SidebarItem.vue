@@ -5,11 +5,7 @@
       <menu-item :title="route.meta.title" :icon="route.meta.icon"></menu-item>
     </template>
     <!-- 循环渲染 -->
-    <sidebar-item
-      v-for="item in route.children"
-      :key="item.path"
-      :route="item"
-    ></sidebar-item>
+    <sidebar-item v-for="item in route.children" :key="item.path" :route="item"></sidebar-item>
   </el-submenu>
   <!-- 渲染 item 项 -->
   <el-menu-item v-else :index="route.path">
@@ -19,6 +15,7 @@
 
 <script setup>
 import MenuItem from './MenuItem'
+import { defineProps } from 'vue'
 // 定义 props
 defineProps({
   route: {
@@ -27,3 +24,5 @@ defineProps({
   }
 })
 </script>
+
+<style scoped></style>
