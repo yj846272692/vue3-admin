@@ -8,6 +8,7 @@ const getters = {
   hasUserInfo: (state) => {
     return JSON.stringify(state.user.userInfo) !== '{}'
   },
-  cssVar: () => variables
+  cssVar: () => variables,
+  sidebarOpend: (state) => state.app.sidebarOpend
 }
 export default getters
