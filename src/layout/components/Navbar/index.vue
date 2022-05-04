@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import {} from 'vue'
+import { ref, watch } from 'vue'
 
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
