@@ -31,10 +31,10 @@ const logoHeight = 44
 
   .logo-title {
     margin-left: 10px;
-    color: #333;
+    color: #ffffff;
     font-weight: 600;
     line-height: 50px;
-    font-size: 16px;
+    font-size: 20px;
     white-space: nowrap;
   }
 }

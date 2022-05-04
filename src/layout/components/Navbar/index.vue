@@ -1,28 +1,29 @@
 <template>
-  <div class='navbar'>
-    <hamburger class="hamburger-container"/>
-    <breadcrumb class="breadcrumb-container"/>
-    <div class='right-menu'>
+  <div class="navbar">
+    <hamburger class="hamburger-container" />
+    <breadcrumb class="breadcrumb-container" />
+    <div class="right-menu">
+      <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
-      <el-dropdown class='avatar-container' trigger='click'>
-        <div class='avatar-wrapper'>
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
           <el-avatar
-            shape='square'
-            :size='40'
-            :src='$store.getters.userInfo.avatar'
+            shape="square"
+            :size="40"
+            :src="$store.getters.userInfo.avatar"
           ></el-avatar>
-          <i class='el-icon-s-tools'></i>
+          <i class="el-icon-s-tools"></i>
         </div>
         <template #dropdown>
-          <el-dropdown-menu class='user-dropdown'>
-            <router-link to='/'>
-              <el-dropdown-item> 首页</el-dropdown-item>
+          <el-dropdown-menu class="user-dropdown">
+            <router-link to="/">
+              <el-dropdown-item> {{ $t('msg.navBar.home') }}</el-dropdown-item>
             </router-link>
-            <a target='_blank' href=''>
-              <el-dropdown-item>课程主页</el-dropdown-item>
+            <a target="_blank" href="">
+              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click='logout'>
-              退出登录
+            <el-dropdown-item divided @click="logout">
+              {{ $t('msg.navBar.logout') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -32,6 +33,7 @@
 </template>
 
 <script setup>
+import LangSelect from '@/components/LangSelect'
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -40,10 +42,9 @@ const store = useStore()
 const logout = () => {
   store.dispatch('user/logout')
 }
-
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .navbar {
   height: 50px;
   overflow: hidden;
@@ -73,6 +74,19 @@ const logout = () => {
     align-items: center;
     float: right;
     padding-right: 16px;
+
+    ::v-deep(.right-menu-item) {
+      display: inline-block;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+      margin-left: 8px;
+
+      &.hover-effect {
+        cursor: pointer;
+      }
+    }
 
     ::v-deep .avatar-container {
       cursor: pointer;
