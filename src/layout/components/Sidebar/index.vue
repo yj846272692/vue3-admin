@@ -2,7 +2,7 @@
   <div>
     <div class="logo-container">
       <el-avatar
-        size="44"
+        :size="logoHeight"
         shape="square"
         src="http://47.96.31.161:9000/vue3/logo-small@2x.png"
       />
@@ -17,20 +17,21 @@
 </template>
 
 <script setup>
-import {} from 'vue'
 import SidebarMenu from './SidebarMenu'
+const logoHeight = 44
 </script>
 
 <style lang="scss" scoped>
 .logo-container {
-  height: 44px;
+  height: v-bind(logoHeight) + 'px';
   padding: 10px 0 22px 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
   .logo-title {
     margin-left: 10px;
-    color: #fff;
+    color: #333;
     font-weight: 600;
     line-height: 50px;
     font-size: 16px;
