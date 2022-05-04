@@ -56,7 +56,6 @@ import { ref } from 'vue'
 import { validatePassword } from './rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-// import SvgIcon from '@/components/SvgIcon'
 
 // 数据源
 const loginForm = ref({
