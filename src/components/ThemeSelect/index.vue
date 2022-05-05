@@ -19,10 +19,14 @@
     </template>
   </el-dropdown>
   <!-- 展示弹出层 -->
-  <div></div>
+  <div>
+    <select-color v-model="selectColorVisible"></select-color>
+  </div>
 </template>
 
 <script setup>
+import SelectColor from './components/SelectColor.vue'
+import { ref } from 'vue'
 const handleSetTheme = (command) => {}
 </script>
 
