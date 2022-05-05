@@ -28,11 +28,10 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { filterRouters } from '@/utils/route'
 import { useRouter } from 'vue-router'
 import { generateRoutes } from './FuseData'
-import { watchSwitchLang } from '@/utils/i18n'
 import Fuse from 'fuse.js'
 
 // 控制 search 显示
@@ -63,22 +62,9 @@ const onSelectChange = (val) => {
   onClose()
 }
 
-const onClose = () => {
-  headerSearchSelectRef.value.blur()
-  isShow.value = false
-  searchOptions.value = []
-}
-watch(isShow, (val) => {
-  if (val) {
-    document.body.addEventListener('click', onClose)
-  } else {
-    document.body.removeEventListener('click', onClose)
-  }
-})
-
 // 检索数据源
 const router = useRouter()
-let searchPool = computed(() => {
+const searchPool = computed(() => {
   const filterRoutes = filterRouters(router.getRoutes())
   return generateRoutes(filterRoutes)
 })
@@ -86,39 +72,26 @@ let searchPool = computed(() => {
 /**
  * 搜索库相关
  */
-
-let fuse
-const initFuse = (searchPool) => {
-  fuse = new Fuse(searchPool.value, {
-    // 是否按优先级进行排序
-    shouldSort: true,
-    // 匹配长度超过这个值的才会被认为是匹配的
-    minMatchCharLength: 1,
-    // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
-    // name：搜索的键
-    // weight：对应的权重
-    keys: [
-      {
-        name: 'title',
-        weight: 0.7
-      },
-      {
-        name: 'path',
-        weight: 0.3
-      }
-    ]
-  })
-}
-
-initFuse(searchPool)
-
-watchSwitchLang(() => {
-  searchPool = computed(() => {
-    const filterRoutes = filterRouters(router.getRoutes())
-    return generateRoutes(filterRoutes)
-  })
-  initFuse(searchPool)
+const fuse = new Fuse(searchPool.value, {
+  // 是否按优先级进行排序
+  shouldSort: true,
+  // 匹配长度超过这个值的才会被认为是匹配的
+  minMatchCharLength: 1,
+  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+  // name：搜索的键
+  // weight：对应的权重
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
 })
+console.log(searchPool)
 </script>
 
 <style lang="scss" scoped>
