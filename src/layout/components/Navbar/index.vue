@@ -6,6 +6,7 @@
       <theme-picker class="right-menu-item hover-effect"></theme-picker>
       <lang-select class="right-menu-item hover-effect" />
       <screenfull class="right-menu-item hover-effect" />
+      <header-search class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -41,6 +42,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import ThemePicker from '@/components/ThemeSelect/index'
 import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
 
 const store = useStore()
 const logout = () => {
