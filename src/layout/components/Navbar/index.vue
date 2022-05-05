@@ -1,31 +1,31 @@
 <template>
-  <div class="navbar">
-    <hamburger class="hamburger-container" />
-    <breadcrumb class="breadcrumb-container" />
-    <div class="right-menu">
-      <theme-picker class="right-menu-item hover-effect"></theme-picker>
-      <lang-select class="right-menu-item hover-effect" />
-      <screenfull class="right-menu-item hover-effect" />
+  <div class='navbar'>
+    <hamburger class="hamburger-container"/>
+    <breadcrumb class="breadcrumb-container"/>
+    <div class='right-menu'>
       <header-search class="right-menu-item hover-effect" />
+      <theme-picker class="right-menu-item hover-effect"></theme-picker>
+      <lang-select class="right-menu-item hover-effect"/>
+      <screenfull class="right-menu-item hover-effect"/>
       <!-- 头像 -->
-      <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
+      <el-dropdown class='avatar-container' trigger='click'>
+        <div class='avatar-wrapper'>
           <el-avatar
-            shape="square"
-            :size="40"
-            :src="$store.getters.userInfo.avatar"
+            shape='square'
+            :size='40'
+            :src='$store.getters.userInfo.avatar'
           ></el-avatar>
-          <i class="el-icon-s-tools"></i>
+          <i class='el-icon-s-tools'></i>
         </div>
         <template #dropdown>
-          <el-dropdown-menu class="user-dropdown">
-            <router-link to="/">
+          <el-dropdown-menu class='user-dropdown'>
+            <router-link to='/'>
               <el-dropdown-item> {{ $t('msg.navBar.home') }}</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="">
+            <a target='_blank' href=''>
               <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout">
+            <el-dropdown-item divided @click='logout'>
               {{ $t('msg.navBar.logout') }}
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -36,11 +36,11 @@
 </template>
 
 <script setup>
+import ThemePicker from '@/components/ThemeSelect/index'
 import LangSelect from '@/components/LangSelect'
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
-import ThemePicker from '@/components/ThemeSelect/index'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 
@@ -48,9 +48,10 @@ const store = useStore()
 const logout = () => {
   store.dispatch('user/logout')
 }
+
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .navbar {
   height: 50px;
   overflow: hidden;

@@ -5,7 +5,9 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue'
 import { generateTitle } from '@/utils/i18n'
+
 defineProps({
   title: {
     type: String,
@@ -16,6 +18,7 @@ defineProps({
     required: true
   }
 })
+
 </script>
 
 <style lang="scss" scoped></style>

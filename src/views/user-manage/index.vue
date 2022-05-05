@@ -1,5 +1,5 @@
 <template>
-  <h1>user-manage</h1>
+  <h1></h1>
 </template>
 
 <script>
@@ -8,4 +8,6 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -9,11 +9,7 @@
     :unique-opened="true"
     router
   >
-    <sidebar-item
-      v-for="item in routes"
-      :key="item.path"
-      :route="item"
-    ></sidebar-item>
+    <sidebar-item v-for="item in routes" :key="item.path" :route="item"></sidebar-item>
   </el-menu>
 </template>
 <script setup>
@@ -21,6 +17,9 @@ import SidebarItem from './SidebarItem'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { filterRouters, generateMenus } from '@/utils/route'
+import variables from '@/styles/variables.module.scss'
+
+console.log(variables)
 
 const router = useRouter()
 const routes = computed(() => {
@@ -34,4 +33,6 @@ const activeMenu = computed(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

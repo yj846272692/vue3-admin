@@ -10,18 +10,19 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closed">{{ $t('msg.universal.cancel') }}</el-button>
-        <el-button type="primary" @click="comfirm">{{
-          $t('msg.universal.confirm')
-        }}</el-button>
+        <el-button type="primary" @click="confirm">{{
+            $t('msg.universal.confirm')
+          }}</el-button>
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script setup>
-import { defineEmits, ref } from 'vue'
+import { defineEmits, defineProps, ref } from 'vue'
 import { useStore } from 'vuex'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+
 defineProps({
   modelValue: {
     type: Boolean,
@@ -29,6 +30,10 @@ defineProps({
   }
 })
 const emits = defineEmits(['update:modelValue'])
+
+const store = useStore()
+
+const mColor = ref(store.getters.mainColor)
 
 // 预定义色值
 const predefineColors = [
@@ -47,9 +52,6 @@ const predefineColors = [
   'hsla(209, 100%, 56%, 0.73)',
   '#c7158577'
 ]
-const store = useStore()
-// 默认色值
-const mColor = ref(store.getters.mainColor)
 
 /**
  * 关闭
@@ -63,15 +65,10 @@ const closed = () => {
  * 2. 保存最新的主题色
  * 3. 关闭 dialog
  */
-
-const comfirm = async () => {
-  // 1.1 获取主题色
+const confirm = async () => {
   const newStyleText = await generateNewStyle(mColor.value)
-  // 1.2 写入最新主题色
   writeNewStyle(newStyleText)
-  // 2. 保存最新的主题色
   store.commit('theme/setMainColor', mColor.value)
-  // 3. 关闭 dialog
   closed()
 }
 </script>
@@ -79,6 +76,7 @@ const comfirm = async () => {
 <style lang="scss" scoped>
 .center {
   text-align: center;
+
   .title {
     margin-bottom: 12px;
   }

@@ -1,15 +1,7 @@
 <template>
   <div>
     <div class="logo-container">
-      <el-avatar
-        :size="logoHeight"
-        shape="square"
-        src="http://47.96.31.161:9000/vue3/logo-small@2x.png"
-      />
-      <!-- <h1 class="logo-title" v-if="$store.getters.sidebarOpened">super-admin</h1> -->
-      <!-- <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
-        {{ $t('msg.test') }}
-      </h1> -->
+      <el-avatar :size="logoHeight" shape="square" src="http://47.96.31.161:9000/vue3/logo-small@2x.png"/>
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
         super-admin
       </h1>
@@ -21,7 +13,6 @@
 </template>
 
 <script setup>
-import {} from 'vue'
 import SidebarMenu from './SidebarMenu'
 const logoHeight = 44
 </script>
@@ -33,9 +24,10 @@ const logoHeight = 44
   display: flex;
   align-items: center;
   justify-content: center;
+
   .logo-title {
     margin-left: 10px;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
     line-height: 50px;
     font-size: 16px;
