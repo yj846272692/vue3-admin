@@ -6,7 +6,7 @@
   >
     <div>
       <el-tooltip :content="$t('msg.navBar.lang')" :effect="effect">
-        <svg-icon icon="language"/>
+        <svg-icon id="guide-lang" icon="language" />
       </el-tooltip>
     </div>
     <template #dropdown>
@@ -44,7 +44,7 @@ const language = computed(() => store.getters.language)
 
 // 切换语言的方法
 const i18n = useI18n()
-const handleSetLanguage = lang => {
+const handleSetLanguage = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLanguage', lang)
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))

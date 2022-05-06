@@ -7,7 +7,7 @@
   >
     <div>
       <el-tooltip :content="$t('msg.navBar.themeChange')">
-        <svg-icon icon="change-theme"/>
+        <svg-icon id="guide-theme" icon="change-theme" />
       </el-tooltip>
     </div>
     <template #dropdown>
@@ -29,7 +29,7 @@ import SelectColor from './components/SelectColor.vue'
 import { ref } from 'vue'
 
 const selectColorVisible = ref(false)
-const handleSetTheme = command => {
+const handleSetTheme = (command) => {
   selectColorVisible.value = true
 }
 </script>

@@ -1,6 +1,11 @@
 <template>
   <div :class="{ show: isShow }" class="header-search">
-    <svg-icon class-name="search-icon" icon="search" @click.stop="onShowClick" />
+    <svg-icon
+      id="guide-search"
+      class-name="search-icon"
+      icon="search"
+      @click.stop="onShowClick"
+    />
     <el-select
       ref="headerSearchSelectRef"
       class="header-search-select"
@@ -64,7 +69,7 @@ const onClose = () => {
   isShow.value = false
   searchOptions.value = []
 }
-watch(isShow, val => {
+watch(isShow, (val) => {
   if (val) {
     document.body.addEventListener('click', onClose)
   } else {
@@ -115,7 +120,6 @@ watchSwitchLang(() => {
   })
   initFuse(searchPool)
 })
-
 </script>
 
 <style lang="scss" scoped>
