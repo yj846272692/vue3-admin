@@ -16,6 +16,9 @@ export default {
       setItem(LANG, lang)
       state.language = lang
     },
+    /**
+     * 添加 tags
+     */
     addTagsViewList(state, tag) {
       const isFind = state.tagsViewList.find((item) => {
         return item.path === tag.path

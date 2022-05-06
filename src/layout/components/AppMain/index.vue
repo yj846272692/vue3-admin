@@ -17,8 +17,7 @@ import { generateTitle, watchSwitchLang } from '@/utils/i18n'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
-// const route = useRoute()
-
+const route = useRoute()
 /**
  * 国际化 tags
  */
