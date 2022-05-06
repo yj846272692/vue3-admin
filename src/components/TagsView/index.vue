@@ -2,13 +2,13 @@
   <div class="tags-view-container">
     <el-scrollbar class="tags-view-wrapper">
       <router-link
-        @contextmenu.prevent="openMenu($event, index)"
         class="tags-view-item"
         :class="isActive(tag) ? 'active' : ''"
         :style="{
           backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
           borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
         }"
+        @contextmenu.prevent="openMenu($event, index)"
         v-for="(tag, index) in $store.getters.tagsViewList"
         :key="tag.fullPath"
         :to="{ path: tag.fullPath }"
@@ -28,10 +28,28 @@
 </template>
 
 <script setup>
-import ContextMenu from './ContextMenu.vue'
-import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
+import ContextMenu from './ContextMenu.vue'
+import { reactive, ref, watch } from 'vue'
+import { useStore } from 'vuex'
+
 const route = useRoute()
+
+const selectIndex = ref(0)
+const visible = ref(false)
+
+const openMenu = (e, index) => {
+  const { x, y } = e
+  menuStyle.left = x + 'px'
+  menuStyle.top = y + 'px'
+  selectIndex.value = index
+  visible.value = true
+}
+
+const menuStyle = reactive({
+  left: 0,
+  top: 0
+})
 
 /**
  * 是否被选中
@@ -43,25 +61,24 @@ const isActive = (tag) => {
 /**
  * 关闭 tag 的点击事件
  */
-const onCloseClick = (index) => {}
-
-// contextMenu 相关
-const selectIndex = ref(0)
-const visible = ref(false)
-const menuStyle = reactive({
-  left: 0,
-  top: 0
-})
-/**
- * 展示 menu
- */
-const openMenu = (e, index) => {
-  const { x, y } = e
-  menuStyle.left = x + 'px'
-  menuStyle.top = y + 'px'
-  selectIndex.value = index
-  visible.value = true
+const store = useStore()
+const onCloseClick = (index) => {
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index: index
+  })
 }
+const closeMenu = () => {
+  visible.value = false
+}
+
+watch(visible, (val) => {
+  if (val) {
+    document.body.addEventListener('click', closeMenu)
+  } else {
+    document.body.removeEventListener('click', closeMenu)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
