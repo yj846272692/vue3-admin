@@ -1,13 +1,9 @@
 <template>
-  <h1>import</h1>
+  <upload-excel></upload-excel>
 </template>
 
-<script>
-export default {
-  name: 'index'
-}
+<script setup>
+import UploadExcel from '@/components/UploadExcel'
 </script>
 
-<style scoped>
-
-</style>
+<style lang="scss" scoped></style>
