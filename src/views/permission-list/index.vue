@@ -1,13 +1,3 @@
 <template>
-  <h1>permission-list</h1>
+  <div>permission-list</div>
 </template>
-
-<script>
-export default {
-  name: 'index'
-}
-</script>
-
-<style scoped>
-
-</style>

@@ -1,9 +1,5 @@
 <template>
-  <el-dropdown
-    trigger="click"
-    class="international"
-    @command="handleSetLanguage"
-  >
+  <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
     <div>
       <el-tooltip :content="$t('msg.navBar.lang')" :effect="effect">
         <svg-icon id="guide-lang" icon="language" />
@@ -11,12 +7,8 @@
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item :disabled="language === 'zh'" command="zh">
-          中文
-        </el-dropdown-item>
-        <el-dropdown-item :disabled="language === 'en'" command="en">
-          English
-        </el-dropdown-item>
+        <el-dropdown-item :disabled="language === 'zh'" command="zh"> 中文 </el-dropdown-item>
+        <el-dropdown-item :disabled="language === 'en'" command="en"> English </el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -24,7 +16,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 
@@ -47,6 +39,7 @@ const i18n = useI18n()
 const handleSetLanguage = (lang) => {
   i18n.locale.value = lang
   store.commit('app/setLanguage', lang)
+  // ElMessage.success('更新成功')
   ElMessage.success(i18n.t('msg.toast.switchLangSuccess'))
 }
 </script>

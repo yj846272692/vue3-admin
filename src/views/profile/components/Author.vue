@@ -2,7 +2,7 @@
   <div class="author-container">
     <div class="header">
       <my-avatar
-        image="https://soft2176-yj.oss-cn-hangzhou.aliyuncs.com/image/avatar.jpg"
+        image="https://syhan.oss-cn-hangzhou.aliyuncs.com/img/me.png"
         height="60px"
         width="60px"
         :hoverable="false"

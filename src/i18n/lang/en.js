@@ -90,8 +90,8 @@ export default {
     feature: 'Feature',
     chapter: 'Chapter',
     author: 'Author',
-    name: 'YG',
-    job: 'Student',
+    name: 'syhan',
+    job: 'Collage student',
     Introduction: 'A smoky rain and Ren Pingsheng'
   },
   userInfo: {

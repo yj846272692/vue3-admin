@@ -89,8 +89,8 @@ export default {
     feature: '功能',
     chapter: '章节',
     author: '作者',
-    name: '小杨',
-    job: '学生',
+    name: 'syhan',
+    job: '大学生',
     Introduction: '一蓑烟雨任平生'
   },
   userInfo: {

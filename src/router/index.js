@@ -117,7 +117,7 @@ const publicRoutes = [
       {
         path: '/profile',
         name: 'profile',
-        component: () => import('@/views/profile'),
+        component: () => import('@/views/profile/index'),
         meta: {
           title: 'profile',
           icon: 'el-icon-user'

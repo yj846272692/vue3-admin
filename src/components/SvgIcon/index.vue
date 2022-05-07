@@ -1,19 +1,13 @@
 <template>
-  <div
-    v-if="isExternal"
-    :style="styleExternalIcon"
-    class="svg-external-icon svg-icon"
-    :class="className"
-  />
+  <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" :class="className" />
   <svg v-else class="svg-icon" :class="className" aria-hidden="true">
-    <use :xlink:href="iconName"/>
+    <use :xlink:href="iconName" />
   </svg>
 </template>
 
 <script setup>
 import { isExternal as external } from '@/utils/validate'
-import { computed, defineProps } from 'vue'
-
+import { computed } from 'vue'
 const props = defineProps({
   // icon 图标
   icon: {

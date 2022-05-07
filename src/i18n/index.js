@@ -3,6 +3,13 @@ import mZhLocale from './lang/zh'
 import mEnLocale from './lang/en'
 import store from '@/store'
 
+/**
+ * 返回当前 lang
+ */
+function getLanguage() {
+  return store && store.getters && store.getters.language
+}
+
 // 创建 message 数据源
 const messages = {
   en: {
@@ -18,7 +25,7 @@ const messages = {
 }
 
 // 创建 locale 语言变量
-const locale = 'zh'
+// const locale = 'zh'
 
 // 初始化 i18n 实例
 const i18n = createI18n({
@@ -29,10 +36,6 @@ const i18n = createI18n({
   locale: getLanguage(),
   messages
 })
-
-function getLanguage() {
-  return store && store.getters && store.getters.language
-}
 
 // 导出 i18n 实例
 export default i18n

@@ -34,7 +34,6 @@ function isNull(data) {
   if (JSON.stringify(data) === '[]') return true
   return false
 }
-
 /**
  * 根据 routes 数据，返回对应 menu 规则数组
  */

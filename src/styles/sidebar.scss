@@ -1,9 +1,9 @@
-@import 'variables.module';
+@import './variables.module.scss';
 
 #app {
   .main-container {
     min-height: 100%;
-    transition: margin-left #{$sideBarDuration};
+    transition: margin-left 0.28s;
     margin-left: $sideBarWidth;
     position: relative;
   }
@@ -15,8 +15,8 @@
     left: 0;
     width: $sideBarWidth !important;
     height: 100%;
-    //background-color: $menuBg;
-    transition: width #{$sideBarDuration};
+    background-color: $menuBg;
+    transition: width 0.28s;
     z-index: 1001;
     overflow: hidden;
 
@@ -66,10 +66,6 @@
       border: none;
       height: 100%;
       width: 100% !important;
-    }
-
-    .is-active {
-      //color: #0021e3;
     }
 
     .is-active > .el-submenu__title {
@@ -148,9 +144,12 @@
   }
 
   .withoutAnimation {
-    .main-container,
+    .main-container {
+      transition: margin-left #{$sideBarDuration};
+    }
+  
     .sidebar-container {
-      transition: none;
+      transition: width #{$sideBarDuration};
     }
   }
 }
@@ -160,7 +159,6 @@
     .svg-icon {
       margin-right: 16px;
     }
-
     .sub-el-icon {
       margin-right: 12px;
       margin-left: -2px;

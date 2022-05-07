@@ -9,12 +9,7 @@
     <div class="user-profile">
       <!-- 头像 -->
       <div class="box-center">
-        <my-avatar
-          :image="$store.getters.userInfo.avatar"
-          :height="'100px'"
-          :width="'100px'"
-          :hoverable="false"
-        >
+        <my-avatar :image="$store.getters.userInfo.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
           <div>Hello</div>
           {{ $store.getters.userInfo.title }}
         </my-avatar>
@@ -48,9 +43,7 @@
     <!-- 项目功能区域 -->
     <div class="project-bio-section">
       <div class="project-bio-section-header">
-        <svg-icon icon="reward" /><span>{{
-          $t('msg.profile.projectFunction')
-        }}</span>
+        <svg-icon icon="reward" /><span>{{ $t('msg.profile.projectFunction') }}</span>
       </div>
       <div class="project-bio-section-body">
         <div class="progress-item" v-for="item in features" :key="item.id">
@@ -63,9 +56,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import MyAvatar from '@/components/MyAvatar/index.vue'
-
 defineProps({
   features: {
     type: Array,
@@ -83,7 +74,6 @@ defineProps({
 
   .user-profile {
     text-align: center;
-
     .user-name {
       font-weight: bold;
     }
@@ -101,25 +91,21 @@ defineProps({
   .project-bio {
     margin-top: 20px;
     color: #606266;
-
     span {
       padding-left: 4px;
     }
 
     .project-bio-section {
       margin-bottom: 36px;
-
       .project-bio-section-header {
         border-bottom: 1px solid #dfe6ec;
         padding-bottom: 10px;
         margin-bottom: 10px;
         font-weight: bold;
       }
-
       .project-bio-section-body {
         .progress-item {
           margin-top: 10px;
-
           div {
             font-size: 14px;
             margin-bottom: 2px;
