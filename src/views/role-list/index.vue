@@ -12,13 +12,24 @@
           :label="$t('msg.role.action')"
           prop="action"
           width="260"
+          #default="{ row }"
         >
-          <el-button type="primary" size="mini">
+          <el-button
+            type="primary"
+            size="mini"
+            @click="onDistributePermissionClick(row)"
+            v-permission="['distributePermission']"
+          >
             {{ $t('msg.role.assignPermissions') }}
           </el-button>
         </el-table-column>
       </el-table>
     </el-card>
+
+    <distribute-permission
+      v-model="distributePermissionVisible"
+      :roleId="selectRoleId"
+    ></distribute-permission>
   </div>
 </template>
 
@@ -32,5 +43,30 @@ const getRoleList = async () => {
   allRoles.value = await roleList()
 }
 getRoleList()
-watchSwitchLang(getRoleList)
+watchSwitchLang(getListData)
+
+// 当前用户角色
+const userRoleTitleList = ref([])
+
+/**
+  确定按钮点击事件
+ */
+const i18n = useI18n()
+const onConfirm = async () => {
+  // 处理数据结构
+  const roles = userRoleTitleList.value.map((title) => {
+    return allRoleList.value.find((role) => role.title === title)
+  })
+
+  // 弹出数据观察
+  alert(props.userId)
+  alert(JSON.stringify(roles))
+  const res = await updateRole(props.userId, roles)
+  alert(JSON.stringify(res))
+
+  ElMessage.success(i18n.t('msg.role.updateRoleSuccess'))
+  closed()
+  // 角色更新成功
+  emits('updateRole')
+}
 </script>
