@@ -11,7 +11,11 @@
       </el-input>
       <el-tabs v-model="activeName">
         <el-tab-pane :label="$t('msg.article.markdown')" name="markdown">
-          <markdown @onSuccess="onSuccess"></markdown>
+          <markdown
+            :title="title"
+            :detail="detail"
+            @onSuccess="onSuccess"
+          ></markdown>
         </el-tab-pane>
         <el-tab-pane :label="$t('msg.article.richText')" name="editor">
           <editor></editor>
@@ -25,6 +29,20 @@
 import Editor from './components/Editor.vue'
 import Markdown from './components/Markdown.vue'
 import { ref } from 'vue'
+import { articleDetail } from '@/api/article'
+
+// 处理编辑相关
+const route = useRoute()
+const articleId = route.params.id
+const detail = ref({})
+const getArticleDetail = async () => {
+  detail.value = await articleDetail(articleId)
+  // 标题赋值
+  title.value = detail.value.title
+}
+if (articleId) {
+  getArticleDetail()
+}
 
 const activeName = ref('markdown')
 const title = ref('')
