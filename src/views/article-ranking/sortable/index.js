@@ -1,7 +1,5 @@
 import { ref } from 'vue'
 import Sortable from 'sortablejs'
-// import i18n from '@/i18n'
-// import { ElMessage } from 'element-plus'
 
 // 排序相关
 export const tableRef = ref(null)
