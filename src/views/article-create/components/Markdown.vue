@@ -17,6 +17,37 @@ import '@toast-ui/editor/dist/i18n/zh-cn'
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { watchSwitchLang } from '@/utils/i18n'
+import { commitArticle } from './commit'
+
+const props = defineProps({
+  title: {
+    required: true,
+    type: String
+  }
+})
+
+const emits = defineEmits(['onSuccess'])
+
+// 处理提交
+const onSubmitClick = async () => {
+  if (props.detail && props.detail._id) {
+    // 编辑文章
+    await editArticle({
+      id: props.detail._id,
+      title: props.title,
+      content: mkEditor.getHTML()
+    })
+  } else {
+    // 创建文章
+    await commitArticle({
+      title: props.title,
+      content: mkEditor.getHTML()
+    })
+  }
+
+  mkEditor.reset()
+  emits('onSuccess')
+}
 
 watchSwitchLang(() => {
   if (!el) return
