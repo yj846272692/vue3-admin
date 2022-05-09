@@ -51,10 +51,16 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue'
+import { ref, onActivated, onMounted } from 'vue'
 import { getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
+import { tableRef, initSortable } from './sortable'
+
+// 表格拖拽相关
+onMounted(() => {
+  initSortable(tableData, getListData)
+})
 /**
  * size 改变触发
  */
@@ -94,6 +100,11 @@ onActivated(getListData)
 </script>
 
 <style lang="scss" scoped>
+::v-deep(.sortable-ghost) {
+  opacity: 0.6;
+  color: #fff !important;
+  background: #304156 !important;
+}
 .article-ranking-container {
   .header {
     margin-bottom: 20px;
