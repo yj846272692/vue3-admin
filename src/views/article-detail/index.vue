@@ -2,17 +2,9 @@
   <div class="article-detail-container">
     <h2 class="title">{{ detail.title }}</h2>
     <div class="header">
-      <span class="author"
-        >{{ $t('msg.article.author') }}：{{ detail.author }}</span
-      >
-      <span class="time"
-        >{{ $t('msg.article.publicDate') }}：{{
-          $filters.relativeTime(detail.publicDate)
-        }}</span
-      >
-      <el-button type="text" class="edit" @click="onEditClick">{{
-        $t('msg.article.edit')
-      }}</el-button>
+      <span class="author">{{ $t('msg.article.author') }}：{{ detail.author }}</span>
+      <span class="time">{{ $t('msg.article.publicDate') }}：{{ $filters.relativeTime(detail.publicDate) }}</span>
+      <el-button type="text" class="edit" @click="onEditClick">{{ $t('msg.article.edit') }}</el-button>
     </div>
     <div class="content" v-html="detail.content"></div>
   </div>

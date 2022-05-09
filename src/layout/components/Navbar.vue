@@ -12,11 +12,7 @@
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <el-avatar
-            shape="square"
-            :size="40"
-            :src="$store.getters.userInfo.avatar"
-          ></el-avatar>
+          <el-avatar shape="square" :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
           <i class="el-icon-s-tools"></i>
         </div>
         <template #dropdown>
@@ -60,9 +56,7 @@ const route = useRoute()
 // 生成数组数据
 const breadcrumbData = ref([])
 const getBreadcrumbData = () => {
-  breadcrumbData.value = route.matched.filter(
-    (item) => item.meta && item.meta.title
-  )
+  breadcrumbData.value = route.matched.filter((item) => item.meta && item.meta.title)
   console.log(breadcrumbData.value)
 }
 // 监听路由变化时触发
