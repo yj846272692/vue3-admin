@@ -14,38 +14,25 @@
         @contextmenu.prevent="openMenu($event, index)"
       >
         {{ tag.title }}
-        <i v-show="!isActive(tag)" class="el-icon-close" @click.prevent.stop="onCloseClick(index)">X </i>
+        <i
+          v-show="!isActive(tag)"
+          class="el-icon-close"
+          @click.prevent.stop="onCloseClick(index)"
+          >X
+        </i>
       </router-link>
     </el-scrollbar>
-    <context-menu v-show="visible" :style="menuStyle" :index="selectIndex"> </context-menu>
+    <context-menu v-show="visible" :style="menuStyle" :index="selectIndex">
+    </context-menu>
   </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import ContextMenu from './ContextMenu.vue'
 import { ref, reactive, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-
-/**
- * 关闭 tag 的点击事件
- */
-const store = useStore()
-const onCloseClick = (index) => {
-  store.commit('app/removeTagsView', {
-    type: 'index',
-    index: index
-  })
-}
-
 const route = useRoute()
-
-/**
- * 是否被选中
- */
-const isActive = (tag) => {
-  return tag.path === route.path
-}
 
 // contextMenu 相关
 const selectIndex = ref(0)
@@ -54,7 +41,6 @@ const menuStyle = reactive({
   left: 0,
   top: 0
 })
-
 /**
  * 展示 menu
  */
@@ -66,6 +52,23 @@ const openMenu = (e, index) => {
   visible.value = true
 }
 
+/**
+ * 是否被选中
+ */
+const isActive = (tag) => {
+  return tag.path === route.path
+}
+
+/**
+ * 关闭 tag 的点击事件
+ */
+const store = useStore()
+const onCloseClick = (index) => {
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index: index
+  })
+}
 /**
  * 关闭 右键 menu
  */

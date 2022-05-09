@@ -9,7 +9,12 @@
     <div class="user-profile">
       <!-- 头像 -->
       <div class="box-center">
-        <my-avatar :image="$store.getters.userInfo.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
+        <my-avatar
+          :image="$store.getters.userInfo.avatar"
+          :height="'100px'"
+          :width="'100px'"
+          :hoverable="false"
+        >
           <div>Hello</div>
           {{ $store.getters.userInfo.title }}
         </my-avatar>
@@ -43,7 +48,9 @@
     <!-- 项目功能区域 -->
     <div class="project-bio-section">
       <div class="project-bio-section-header">
-        <svg-icon icon="reward" /><span>{{ $t('msg.profile.projectFunction') }}</span>
+        <svg-icon icon="reward" /><span>{{
+          $t('msg.profile.projectFunction')
+        }}</span>
       </div>
       <div class="project-bio-section-body">
         <div class="progress-item" v-for="item in features" :key="item.id">

@@ -90,9 +90,10 @@ export default {
     feature: 'Feature',
     chapter: 'Chapter',
     author: 'Author',
-    name: 'syhan',
-    job: 'Collage student',
-    Introduction: 'A smoky rain and Ren Pingsheng'
+    name: 'poicc',
+    job: 'A student majoring in software',
+    Introduction:
+      'Software major senior Web full stack yyds'
   },
   userInfo: {
     print: 'Print',

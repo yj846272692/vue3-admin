@@ -1,6 +1,11 @@
 <template>
   <el-timeline>
-    <el-timeline-item v-for="item in chapterData" :key="item.id" :timestamp="item.timestamp" placement="top">
+    <el-timeline-item
+      v-for="item in chapterData"
+      :key="item.id"
+      :timestamp="item.timestamp"
+      placement="top"
+    >
       <el-card>
         <h4>{{ item.content }}</h4>
       </el-card>

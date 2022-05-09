@@ -1,6 +1,11 @@
 <template>
   <div :class="{ show: isShow }" class="header-search">
-    <svg-icon id="guide-search" class-name="search-icon" icon="search" @click.stop="onShowClick" />
+    <svg-icon
+      id="guide-search"
+      class-name="search-icon"
+      icon="search"
+      @click.stop="onShowClick"
+    />
     <el-select
       ref="headerSearchSelectRef"
       class="header-search-select"
@@ -12,52 +17,24 @@
       :remote-method="querySearch"
       @change="onSelectChange"
     >
-      <!-- <el-option v-for="option in 5" :key="option" :label="option" :value="option"></el-option> -->
       <el-option
         v-for="option in searchOptions"
         :key="option.item.path"
         :label="option.item.title.join(' > ')"
         :value="option.item"
-      ></el-option>
+      >
+      </el-option>
     </el-select>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { generateRoutes } from './FuseData'
+import Fuse from 'fuse.js'
 import { filterRouters } from '@/utils/route'
 import { useRouter } from 'vue-router'
-import { generateRoutes } from './FuseData'
 import { watchSwitchLang } from '@/utils/i18n'
-import Fuse from 'fuse.js'
-
-// 控制 search 显示
-const isShow = ref(false)
-// el-select 实例
-const headerSearchSelectRef = ref(null)
-const onShowClick = () => {
-  isShow.value = !isShow.value
-  headerSearchSelectRef.value.focus()
-}
-// 搜索结果
-const searchOptions = ref([])
-
-// search 相关
-const search = ref('')
-// 搜索方法
-const querySearch = (query) => {
-  // console.log(fuse.search(query))
-  if (query !== '') {
-    searchOptions.value = fuse.search(query)
-  } else {
-    searchOptions.value = []
-  }
-}
-// 选中回调
-const onSelectChange = (val) => {
-  router.push(val.path)
-  onClose()
-}
 
 // 检索数据源
 const router = useRouter()
@@ -103,6 +80,32 @@ watchSwitchLang(() => {
   })
   initFuse(searchPool.value)
 })
+
+// 控制 search 显示
+const isShow = ref(false)
+// el-select 实例
+const headerSearchSelectRef = ref(null)
+const onShowClick = () => {
+  isShow.value = !isShow.value
+  headerSearchSelectRef.value.focus()
+}
+
+// search 相关
+const search = ref('')
+// 搜索结果
+const searchOptions = ref([])
+// 搜索方法
+const querySearch = (query) => {
+  if (query !== '') {
+    searchOptions.value = fuse.search(query)
+  } else {
+    searchOptions.value = []
+  }
+}
+// 选中回调
+const onSelectChange = (val) => {
+  router.push(val.path)
+}
 
 /**
  * 关闭 search 的处理事件

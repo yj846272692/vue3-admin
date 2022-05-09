@@ -1,6 +1,5 @@
 import { LANG, TAGS_VIEW } from '@/constant'
 import { getItem, setItem } from '@/utils/storage'
-
 export default {
   namespaced: true,
   state: () => ({
@@ -23,7 +22,7 @@ export default {
      * 添加 tags
      */
     addTagsViewList(state, tag) {
-      const isFind = state.tagsViewList.find(item => {
+      const isFind = state.tagsViewList.find((item) => {
         return item.path === tag.path
       })
       // 处理重复
@@ -40,9 +39,9 @@ export default {
       setItem(TAGS_VIEW, state.tagsViewList)
     },
     /**
-* 删除 tag
-* @param {type: 'other'||'right'||'index', index: index} payload
-*/
+     * 删除 tag
+     * @param {type: 'other'||'right'||'index', index: index} payload
+     */
     removeTagsView(state, payload) {
       if (payload.type === 'index') {
         state.tagsViewList.splice(payload.index, 1)

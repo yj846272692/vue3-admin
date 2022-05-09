@@ -27,6 +27,46 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
+import { permissionList } from '@/api/permission'
+import { rolePermission, distributePermission } from '@/api/role'
+import { useI18n } from 'vue-i18n'
+import { ElMessage } from 'element-plus'
+import { watchSwitchLang } from '@/utils/i18n'
+
+/**
+  确定按钮点击事件
+ */
+const i18n = useI18n()
+const onConfirm = async () => {
+  const res = await distributePermission({
+    roleId: props.roleId,
+    permissions: treeRef.value.getCheckedKeys()
+  })
+  alert(JSON.stringify(res))
+  ElMessage.success(i18n.t('msg.role.updateRoleSuccess'))
+  closed()
+}
+
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    required: true
+  },
+  roleId: {
+    type: String,
+    required: true
+  }
+})
+const emits = defineEmits(['update:modelValue'])
+
+/**
+ * 关闭
+ */
+const closed = () => {
+  emits('update:modelValue', false)
+}
+
 // 所有权限
 const allPermission = ref([])
 const getPermissionList = async () => {
@@ -40,4 +80,20 @@ const defaultProps = {
   children: 'children',
   label: 'permissionName'
 }
+
+// tree 节点
+const treeRef = ref(null)
+
+// 获取当前用户角色的权限
+const getRolePermission = async () => {
+  const checkedKeys = await rolePermission(props.roleId)
+  treeRef.value.setCheckedKeys(checkedKeys)
+}
+
+watch(
+  () => props.roleId,
+  (val) => {
+    if (val) getRolePermission()
+  }
+)
 </script>

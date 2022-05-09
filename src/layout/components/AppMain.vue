@@ -13,9 +13,9 @@
 <script setup>
 import { watch } from 'vue'
 import { isTags } from '@/utils/tags'
+import { generateTitle, watchSwitchLang } from '@/utils/i18n'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { generateTitle, watchSwitchLang } from '@/utils/i18n'
 
 const route = useRoute()
 
@@ -57,7 +57,6 @@ watch(
     immediate: true
   }
 )
-
 /**
  * 国际化 tags
  */
